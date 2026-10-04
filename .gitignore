@@ -1,0 +1,9 @@
+target/*
+!target/idl/
+!target/types/
+node_modules/
+keys/
+.anchor/
+test-ledger/
+*.seed
+.env

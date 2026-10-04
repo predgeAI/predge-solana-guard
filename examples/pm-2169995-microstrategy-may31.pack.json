@@ -1,0 +1,302 @@
+{
+ "version": "predge-evidence-pack-v0",
+ "issuer": "predge.io (PROTOTYPE)",
+ "algorithm": "ed25519",
+ "kind": "settlement-evidence-pack",
+ "key_notice": "THROWAWAY DEV KEY generated for this prototype on 2026-10-03. Not Predge's production identity; do not trust it as such.",
+ "public_key": "faf500dd1bfdd82bb5d24626ec24d14e8f5390bda84c71dae9efc3da20e3af06",
+ "content_hash": "fed6d15eb50da0c8e08e4a1fd95b767f7d9ced13985e246ede843705454b1f64",
+ "canonical": "{\"bulletin_board_check\":{\"context\":\"in 2026, 28 of 303 disputed Polymarket markets with bulletins had updates only from such a non-initializer operator account\",\"getUpdates(questionID, actual poster)\":\"2 updates (the two texts above)\",\"getUpdates(questionID, initializer)\":\"0 updates (adapter eth_call, 2026-10-03)\",\"rule_text\":\"ancillary data: 'Updates made by the question creator via the bulletin board ... should be considered'\"},\"cross_venue_rule_reference\":{\"listed_contracts_found\":\"0 (live + historical API, 2026-10-03)\",\"reading\":\"Kalshi's template for the same question type is confirmation-based by wording; Polymarket's original wording was occurrence-based and the confirmation requirement appeared only in the 17:00Z bulletin.\",\"series\":\"KXMSTRSELL 'Will MicroStrategy sell any Bitcoin before date'\",\"template\":\"EVENTCONFIRMED\",\"template_pdf_sha256\":\"2c81e635370230fec746a808940f16c9747347eb7b18742d06dcbd0d62f999a4\",\"underlying_text\":\"whether <event claim> is reported as confirmed or verified by a Source Agency after Issuance and before <date>\",\"venue\":\"Kalshi\"},\"dvm_vote\":{\"chain\":\"Ethereum\",\"contract\":\"0x004395edb43efca9885cedad51ec9faf93bd34ac\",\"l1_ancillary\":\"ancillaryDataHash:7b44b4ef2ded33c2d4b51cc286160afcc6d713f9bf5ada6578fc0e07eb7e52fc,childBlockNumber:87742777,childOracle:ac60353a54873c446101216829a6a98cdbbc3f3d,childRequester:2c0367a9db231ddebd88a94b4f6461a6e47c58b1,childChainId:137\",\"note\":\"aggregates only; per-voter data intentionally not included\",\"request_link_proof\":\"L1 ancillaryDataHash == keccak256(L2 ancillary + ',ooRequester:' + adapter) (checked: true); childBlockNumber == Polygon dispute block\",\"resolved_tx\":\"0xc50ff080715b8fded2658cf8ccfd31994f8c3f56d58f238e98e1b9fa70f37f78\",\"resolved_utc\":\"2026-06-04T00:00:35Z\",\"result\":\"No\",\"result_price\":\"0\",\"revealed_tokens_UMA\":\"19433398.3\",\"reveals_total\":\"607\",\"round_id\":\"10303\",\"share_of_revealed_tokens_No\":\"0.98611\",\"share_of_revealed_tokens_Yes\":\"0.01389\"},\"findings\":[\"F1. The rules written at creation (on-chain ancillary data, 2026-05-05) make Yes depend on a sale happening by the deadline; they do not say whether evidence published after the deadline counts.\",\"F2. Strategy's own 8-K (EDGAR accepted 2026-06-01 12:00:16Z) reports 32 BTC sold during May 26-31, 2026, i.e. inside the window; the disclosure itself came ~8 h after the deadline.\",\"F3. Both 'No' proposals were disputed before the 8-K was public (04:12Z and 04:53Z), so the case went to the UMA DVM.\",\"F4. The clause 'Confirmation achieved outside of the market's time frame does not qualify' first appears on-chain at 2026-06-01T17:00:16Z: 13.0 h after the deadline, 5.0 h after the 8-K and after both disputes.\",\"F5. The UMA DVM resolved No with 98.61% of revealed tokens (607 reveals, 19.43M UMA); the market settled No on 2026-06-04T00:34:19Z.\",\"F6. Two sibling markets of the same event (June 30, Dec 31) resolved Yes on the same sale.\",\"F7. YES traded 11.6c at the deadline and 11.6c at 11:50Z, peaked at 81.2c at 12:20Z (20 min after the 8-K), traded 55.3c just before the clarification and 0.05c ten minutes after it (CLOB price history, 10-min points).\",\"F8. Both bulletin updates were posted from a Polymarket operator account other than the question's initializer; the adapter's bulletin-board getter for the initializer returns no updates for this question.\"],\"issued_at\":\"2026-10-02T23:39:52Z\",\"market_context\":{\"press_reported_volume_usd\":[\"60M (cryptotimes.io)\",\"80M (cointelegraph)\",\"85M (kucoin/thedefiant)\",\"118M (nulltx)\"],\"sibling_markets_same_event\":[{\"market_id\":\"516926\",\"outcome_prices\":\"[\\\"0\\\", \\\"1\\\"]\",\"question\":\"MicroStrategy sells any Bitcoin in 2025?\",\"uma_statuses\":\"[\\\"proposed\\\", \\\"disputed\\\", \\\"proposed\\\", \\\"disputed\\\"]\",\"venue_reported_volume_usd\":\"17976158\"},{\"market_id\":\"692250\",\"outcome_prices\":\"[\\\"0\\\", \\\"1\\\"]\",\"question\":\"MicroStrategy sells any Bitcoin by March 31, 2026?\",\"uma_statuses\":\"[\\\"proposed\\\"]\",\"venue_reported_volume_usd\":\"2710380\"},{\"market_id\":\"692258\",\"outcome_prices\":\"[\\\"1\\\", \\\"0\\\"]\",\"question\":\"MicroStrategy sells any Bitcoin by June 30, 2026?\",\"uma_statuses\":\"[\\\"proposed\\\"]\",\"venue_reported_volume_usd\":\"8418661\"},{\"market_id\":\"824952\",\"outcome_prices\":\"[\\\"1\\\", \\\"0\\\"]\",\"question\":\"MicroStrategy sells any Bitcoin by December 31, 2026?\",\"uma_statuses\":\"[\\\"proposed\\\"]\",\"venue_reported_volume_usd\":\"2252109\"}],\"venue_reported_volume_usd_gamma\":\"375813105\",\"volume_note\":\"venue figure (gamma volumeClob) and press figures disagree by 3-6x; methodology of the venue figure is not published\",\"yes_price_path_clob\":{\"at_deadline\":\"0.1155\",\"at_dvm_resolution\":\"0.0015\",\"before_8k_12:00Z\":\"0.116\",\"before_clarification_16:50Z\":\"0.5525\",\"max_after_8k\":\"0.812 (12:20Z)\",\"ten_minutes_after_clarification_17:10Z\":\"0.0005\"}},\"not_claimed\":\"This pack states public facts and their order. It does not allege wrongdoing by any person, and contains no trader, proposer, disputer or voter identities.\",\"oracle_path\":{\"adapter\":\"Polymarket UmaCtfAdapter 0x65070be91477460d8a7aeeb94ef92fe056c2f2a7\",\"disputes\":[{\"disputed_price\":\"0\",\"time_utc\":\"2026-06-01T04:12:20Z\",\"tx\":\"0xc5e63a7828b193232c33cb93db44b2f1c05f017c4bfe16d54078be560ae25aab\"},{\"disputed_price\":\"0\",\"time_utc\":\"2026-06-01T04:53:01Z\",\"tx\":\"0xbcbd0d858e43a073bd64b334577c088b72e6dde8b1a9184de658108b0d2a377e\"}],\"oracle\":\"UMA Managed Optimistic Oracle V2 (Polygon) 0x2c0367a9db231ddebd88a94b4f6461a6e47c58b1\",\"proposals\":[{\"price\":\"0\",\"time_utc\":\"2026-06-01T04:00:05Z\",\"tx\":\"0x2ff870a45d2de518672af34d8d7711fab1c14d7851db86869e3603d22f13a34c\"},{\"price\":\"0\",\"time_utc\":\"2026-06-01T04:12:53Z\",\"tx\":\"0xf2f9d6feed22bbb12cc85b8661af7262c6694d33529ad31babb1d88a93444aff\"}],\"requests\":[{\"bond_usdc\":\"500.0\",\"custom_liveness_s\":\"0\",\"expiration_utc\":\"2026-06-01T06:00:05Z\",\"final_fee_usdc\":\"250.0\",\"proposal_time_utc_derived\":\"2026-06-01T04:00:05Z\",\"proposed_price\":\"0\",\"request_timestamp_utc\":\"2026-05-05T23:45:54Z\",\"resolved_price\":\"0\",\"reward_usdc\":\"0.0\",\"settled\":true},{\"bond_usdc\":\"500.0\",\"custom_liveness_s\":\"0\",\"expiration_utc\":\"2026-06-01T06:12:53Z\",\"final_fee_usdc\":\"250.0\",\"proposal_time_utc_derived\":\"2026-06-01T04:12:53Z\",\"proposed_price\":\"0\",\"request_timestamp_utc\":\"2026-06-01T04:12:20Z\",\"resolved_price\":\"0\",\"reward_usdc\":\"0.0\",\"settled\":true}]},\"pack_id\":\"pm-2169995-v0\",\"recompute\":\"python3 src/strategy_collect.py && python3 src/dvm_collect.py (read-only RPC) reproduce every on-chain field; python3 src/verify_pack.py <pack> --onchain re-checks them live\",\"rule_updates_after_start\":[{\"disputes_before_this_update\":\"2\",\"hours_after_deadline\":\"10.24\",\"posted_by\":\"a Polymarket operator (market-creator) account that is not this question's initializer\",\"posted_utc\":\"2026-06-01T14:13:10Z\",\"text\":\"We’re aware of the dispute on this market. If a clarification is to be issued, it will be at 1:00 PM ET on June 1. If no statement is issued at that time, then there will be no clarification by the Polymarket team. The orderbook will be cleared at 1:00 PM ET, regardless of whether a clarification is made.\\n\",\"text_sha256\":\"7fa1e5d7cdf04921cfc64b696c5d83627667c945cd22033a90f6bc0a82c59e31\",\"tx\":\"0xbd0bf99bdb0488e772c8c90abf18913871d449d19322bc05839fd43ceaa6ffbd\"},{\"disputes_before_this_update\":\"2\",\"hours_after_deadline\":\"13.02\",\"posted_by\":\"a Polymarket operator (market-creator) account that is not this question's initializer\",\"posted_utc\":\"2026-06-01T17:00:16Z\",\"text\":\"No information from MSTR, on-chain data, or consensus of credible reporting confirmed that MicroStrategy sold Bitcoin within the market's timeframe. \\n\\nConfirmation achieved outside of the market's time frame does not qualify.\",\"text_sha256\":\"a6513d3a9e1f81f07fc17a8189ddca086b543ab4af31d68e3590c019f3cf5ea6\",\"tx\":\"0x739e6133c031f5d1cdb4eb998fd3b037ee6fbc6829479a51154f4072c70c4239\"}],\"rules_at_creation\":{\"bulletin_clause\":\"ancillary data says updates by the question creator via the adapter bulletin board 'should be considered'\",\"creation_tx\":\"0xdfad95ade18569a2779024037d50bda3737df5af1394461c3f755cf3e4d4b18c\",\"deadline\":\"11:59 PM ET on 2026-05-31 (= 2026-06-01T03:59:00Z)\",\"on_chain_ancillary_sha256\":\"73cda1e7d17175a087879a7ff69cf6038c0fa4e24d4f2673721b0c9240ec0784\",\"questionID_equals_keccak256_ancillary\":\"true\",\"text\":\"This market will resolve to \\\"Yes\\\" if MicroStrategy sells any of its Bitcoin by 11:59 PM ET on the date specified in the title. Otherwise, this market will resolve to \\\"No\\\".\\n\\nThe primary resolution source for this market will be information from MSTR and on-chain data, however a consensus of credible reporting will also be used.\"},\"sources\":[{\"how\":\"eth_getLogs/eth_getTransactionReceipt via public RPC; tx hashes above\",\"what\":\"Polygon on-chain logs and receipts (adapter, MOOV2, CTF)\"},{\"how\":\"eth_getLogs via public RPC; resolved_tx above\",\"what\":\"Ethereum UMA VotingV2 logs\"},{\"fetched_utc\":\"2026-10-02T22:47Z\",\"sha256\":\"3f2b7076a78edc2e8e9785436ba4b04638d22b459357c0305ab857be3c24ec43\",\"url\":\"https://gamma-api.polymarket.com/events/16167\",\"what\":\"Polymarket gamma event 16167\"},{\"fetched_utc\":\"2026-10-02T23:3xZ\",\"url\":\"https://clob.polymarket.com/prices-history\",\"what\":\"Polymarket CLOB price history (YES token)\"},{\"url\":\"https://www.sec.gov/Archives/edgar/data/1050446/000119312526249768/0001193125-26-249768-index.htm\",\"what\":\"SEC EDGAR filing index 0001193125-26-249768\"},{\"url\":\"https://assets.kalshi.com/contract_terms/EVENTCONFIRMED.pdf\",\"what\":\"Kalshi series KXMSTRSELL + EVENTCONFIRMED terms\"}],\"subject\":{\"condition_id\":\"0x3733a1b647e7364095736ab0966465d896a84cf3b6bc1695ca1f26c3239b3868\",\"event_id\":\"16167\",\"final_outcome\":\"No\",\"market_id\":\"2169995\",\"payouts\":[\"0\",\"1\"],\"question\":\"MicroStrategy sells any Bitcoin by May 31, 2026?\",\"question_id\":\"0x0382b71b4df8e161d7947966fef8e5f6cc2d29b0285f87761e569b043e68f83d\",\"settled_at_utc\":\"2026-06-04T00:34:19Z\",\"slug\":\"microstrategy-sells-any-bitcoin-by-may-31-2026\",\"venue\":\"Polymarket (international, on-chain settlement)\"},\"timeline\":[{\"ref\":\"0xdfad95ade18569a2779024037d50bda3737df5af1394461c3f755cf3e4d4b18c\",\"time_utc\":\"2026-05-05T23:45:54Z\",\"what\":\"Market created on-chain: QuestionInitialized + oracle RequestPrice (bond 500 USDC)\"},{\"ref\":\"SEC EDGAR 0001193125-26-249768\",\"time_utc\":\"2026-05-26 .. 2026-05-31\",\"what\":\"Strategy sells 32 BTC (per its own 8-K, period May 26-31, 2026)\"},{\"ref\":\"rules at creation\",\"time_utc\":\"2026-06-01T03:59:00Z\",\"what\":\"Deadline: 11:59 PM ET May 31, 2026\"},{\"ref\":\"0x2ff870a45d2de518672af34d8d7711fab1c14d7851db86869e3603d22f13a34c\",\"time_utc\":\"2026-06-01T04:00:05Z\",\"what\":\"ProposePrice on Managed OOv2 (price 0; 0 = No)\"},{\"ref\":\"0xc5e63a7828b193232c33cb93db44b2f1c05f017c4bfe16d54078be560ae25aab\",\"time_utc\":\"2026-06-01T04:12:20Z\",\"what\":\"DisputePrice on Managed OOv2 (price 0; 0 = No)\"},{\"ref\":\"0xc5e63a7828b193232c33cb93db44b2f1c05f017c4bfe16d54078be560ae25aab\",\"time_utc\":\"2026-06-01T04:12:20Z\",\"what\":\"Adapter reset after 1st dispute (new oracle request)\"},{\"ref\":\"0xf2f9d6feed22bbb12cc85b8661af7262c6694d33529ad31babb1d88a93444aff\",\"time_utc\":\"2026-06-01T04:12:53Z\",\"what\":\"ProposePrice on Managed OOv2 (price 0; 0 = No)\"},{\"ref\":\"0xbcbd0d858e43a073bd64b334577c088b72e6dde8b1a9184de658108b0d2a377e\",\"time_utc\":\"2026-06-01T04:53:01Z\",\"what\":\"DisputePrice on Managed OOv2 (price 0; 0 = No)\"},{\"ref\":\"https://www.sec.gov/Archives/edgar/data/1050446/000119312526249768/0001193125-26-249768-index.htm\",\"time_utc\":\"2026-06-01T12:00:16Z\",\"what\":\"SEC EDGAR accepts Strategy 8-K disclosing the sale of 32 BTC during May 26-31 (accepted 08:00:16 ET)\"},{\"ref\":\"0xbd0bf99bdb0488e772c8c90abf18913871d449d19322bc05839fd43ceaa6ffbd\",\"text_sha256\":\"7fa1e5d7cdf04921cfc64b696c5d83627667c945cd22033a90f6bc0a82c59e31\",\"time_utc\":\"2026-06-01T14:13:10Z\",\"what\":\"Bulletin board update (Additional context) posted on-chain\"},{\"ref\":\"0x739e6133c031f5d1cdb4eb998fd3b037ee6fbc6829479a51154f4072c70c4239\",\"text_sha256\":\"a6513d3a9e1f81f07fc17a8189ddca086b543ab4af31d68e3590c019f3cf5ea6\",\"time_utc\":\"2026-06-01T17:00:16Z\",\"what\":\"Bulletin board update (Additional context) posted on-chain\"},{\"ref\":\"0xc50ff080715b8fded2658cf8ccfd31994f8c3f56d58f238e98e1b9fa70f37f78\",\"time_utc\":\"2026-06-04T00:00:35Z\",\"what\":\"UMA DVM (Ethereum VotingV2) round 10303 resolves the escalated request: price 0 (No)\"},{\"ref\":\"0x9ab32c9cbd099e2ece28a908501dd49a19d93830f9c6b31cbf14f686a89e31da\",\"time_utc\":\"2026-06-04T00:34:19Z\",\"what\":\"Polygon: QuestionResolved (No) + CTF ConditionResolution; market settled\"}]}",
+ "signature": "2ac9e1d494076fae1a618c275f789ed2570907d6c0d19b7c95755765984aa5986c06d8fbd011c5a7a70b2dfd3dbf542613a7d34dbaf4dfc253244190f9795a0d",
+ "payload": {
+  "pack_id": "pm-2169995-v0",
+  "issued_at": "2026-10-02T23:39:52Z",
+  "subject": {
+   "venue": "Polymarket (international, on-chain settlement)",
+   "market_id": "2169995",
+   "event_id": "16167",
+   "question": "MicroStrategy sells any Bitcoin by May 31, 2026?",
+   "slug": "microstrategy-sells-any-bitcoin-by-may-31-2026",
+   "condition_id": "0x3733a1b647e7364095736ab0966465d896a84cf3b6bc1695ca1f26c3239b3868",
+   "question_id": "0x0382b71b4df8e161d7947966fef8e5f6cc2d29b0285f87761e569b043e68f83d",
+   "final_outcome": "No",
+   "settled_at_utc": "2026-06-04T00:34:19Z",
+   "payouts": [
+    "0",
+    "1"
+   ]
+  },
+  "timeline": [
+   {
+    "time_utc": "2026-05-05T23:45:54Z",
+    "what": "Market created on-chain: QuestionInitialized + oracle RequestPrice (bond 500 USDC)",
+    "ref": "0xdfad95ade18569a2779024037d50bda3737df5af1394461c3f755cf3e4d4b18c"
+   },
+   {
+    "time_utc": "2026-05-26 .. 2026-05-31",
+    "what": "Strategy sells 32 BTC (per its own 8-K, period May 26-31, 2026)",
+    "ref": "SEC EDGAR 0001193125-26-249768"
+   },
+   {
+    "time_utc": "2026-06-01T03:59:00Z",
+    "what": "Deadline: 11:59 PM ET May 31, 2026",
+    "ref": "rules at creation"
+   },
+   {
+    "time_utc": "2026-06-01T04:00:05Z",
+    "what": "ProposePrice on Managed OOv2 (price 0; 0 = No)",
+    "ref": "0x2ff870a45d2de518672af34d8d7711fab1c14d7851db86869e3603d22f13a34c"
+   },
+   {
+    "time_utc": "2026-06-01T04:12:20Z",
+    "what": "DisputePrice on Managed OOv2 (price 0; 0 = No)",
+    "ref": "0xc5e63a7828b193232c33cb93db44b2f1c05f017c4bfe16d54078be560ae25aab"
+   },
+   {
+    "time_utc": "2026-06-01T04:12:20Z",
+    "what": "Adapter reset after 1st dispute (new oracle request)",
+    "ref": "0xc5e63a7828b193232c33cb93db44b2f1c05f017c4bfe16d54078be560ae25aab"
+   },
+   {
+    "time_utc": "2026-06-01T04:12:53Z",
+    "what": "ProposePrice on Managed OOv2 (price 0; 0 = No)",
+    "ref": "0xf2f9d6feed22bbb12cc85b8661af7262c6694d33529ad31babb1d88a93444aff"
+   },
+   {
+    "time_utc": "2026-06-01T04:53:01Z",
+    "what": "DisputePrice on Managed OOv2 (price 0; 0 = No)",
+    "ref": "0xbcbd0d858e43a073bd64b334577c088b72e6dde8b1a9184de658108b0d2a377e"
+   },
+   {
+    "time_utc": "2026-06-01T12:00:16Z",
+    "what": "SEC EDGAR accepts Strategy 8-K disclosing the sale of 32 BTC during May 26-31 (accepted 08:00:16 ET)",
+    "ref": "https://www.sec.gov/Archives/edgar/data/1050446/000119312526249768/0001193125-26-249768-index.htm"
+   },
+   {
+    "time_utc": "2026-06-01T14:13:10Z",
+    "what": "Bulletin board update (Additional context) posted on-chain",
+    "ref": "0xbd0bf99bdb0488e772c8c90abf18913871d449d19322bc05839fd43ceaa6ffbd",
+    "text_sha256": "7fa1e5d7cdf04921cfc64b696c5d83627667c945cd22033a90f6bc0a82c59e31"
+   },
+   {
+    "time_utc": "2026-06-01T17:00:16Z",
+    "what": "Bulletin board update (Additional context) posted on-chain",
+    "ref": "0x739e6133c031f5d1cdb4eb998fd3b037ee6fbc6829479a51154f4072c70c4239",
+    "text_sha256": "a6513d3a9e1f81f07fc17a8189ddca086b543ab4af31d68e3590c019f3cf5ea6"
+   },
+   {
+    "time_utc": "2026-06-04T00:00:35Z",
+    "what": "UMA DVM (Ethereum VotingV2) round 10303 resolves the escalated request: price 0 (No)",
+    "ref": "0xc50ff080715b8fded2658cf8ccfd31994f8c3f56d58f238e98e1b9fa70f37f78"
+   },
+   {
+    "time_utc": "2026-06-04T00:34:19Z",
+    "what": "Polygon: QuestionResolved (No) + CTF ConditionResolution; market settled",
+    "ref": "0x9ab32c9cbd099e2ece28a908501dd49a19d93830f9c6b31cbf14f686a89e31da"
+   }
+  ],
+  "rules_at_creation": {
+   "text": "This market will resolve to \"Yes\" if MicroStrategy sells any of its Bitcoin by 11:59 PM ET on the date specified in the title. Otherwise, this market will resolve to \"No\".\n\nThe primary resolution source for this market will be information from MSTR and on-chain data, however a consensus of credible reporting will also be used.",
+   "deadline": "11:59 PM ET on 2026-05-31 (= 2026-06-01T03:59:00Z)",
+   "on_chain_ancillary_sha256": "73cda1e7d17175a087879a7ff69cf6038c0fa4e24d4f2673721b0c9240ec0784",
+   "questionID_equals_keccak256_ancillary": "true",
+   "creation_tx": "0xdfad95ade18569a2779024037d50bda3737df5af1394461c3f755cf3e4d4b18c",
+   "bulletin_clause": "ancillary data says updates by the question creator via the adapter bulletin board 'should be considered'"
+  },
+  "rule_updates_after_start": [
+   {
+    "posted_utc": "2026-06-01T14:13:10Z",
+    "text": "We’re aware of the dispute on this market. If a clarification is to be issued, it will be at 1:00 PM ET on June 1. If no statement is issued at that time, then there will be no clarification by the Polymarket team. The orderbook will be cleared at 1:00 PM ET, regardless of whether a clarification is made.\n",
+    "text_sha256": "7fa1e5d7cdf04921cfc64b696c5d83627667c945cd22033a90f6bc0a82c59e31",
+    "tx": "0xbd0bf99bdb0488e772c8c90abf18913871d449d19322bc05839fd43ceaa6ffbd",
+    "hours_after_deadline": "10.24",
+    "disputes_before_this_update": "2",
+    "posted_by": "a Polymarket operator (market-creator) account that is not this question's initializer"
+   },
+   {
+    "posted_utc": "2026-06-01T17:00:16Z",
+    "text": "No information from MSTR, on-chain data, or consensus of credible reporting confirmed that MicroStrategy sold Bitcoin within the market's timeframe. \n\nConfirmation achieved outside of the market's time frame does not qualify.",
+    "text_sha256": "a6513d3a9e1f81f07fc17a8189ddca086b543ab4af31d68e3590c019f3cf5ea6",
+    "tx": "0x739e6133c031f5d1cdb4eb998fd3b037ee6fbc6829479a51154f4072c70c4239",
+    "hours_after_deadline": "13.02",
+    "disputes_before_this_update": "2",
+    "posted_by": "a Polymarket operator (market-creator) account that is not this question's initializer"
+   }
+  ],
+  "bulletin_board_check": {
+   "rule_text": "ancillary data: 'Updates made by the question creator via the bulletin board ... should be considered'",
+   "getUpdates(questionID, initializer)": "0 updates (adapter eth_call, 2026-10-03)",
+   "getUpdates(questionID, actual poster)": "2 updates (the two texts above)",
+   "context": "in 2026, 28 of 303 disputed Polymarket markets with bulletins had updates only from such a non-initializer operator account"
+  },
+  "oracle_path": {
+   "oracle": "UMA Managed Optimistic Oracle V2 (Polygon) 0x2c0367a9db231ddebd88a94b4f6461a6e47c58b1",
+   "adapter": "Polymarket UmaCtfAdapter 0x65070be91477460d8a7aeeb94ef92fe056c2f2a7",
+   "requests": [
+    {
+     "request_timestamp_utc": "2026-05-05T23:45:54Z",
+     "settled": true,
+     "bond_usdc": "500.0",
+     "custom_liveness_s": "0",
+     "proposed_price": "0",
+     "resolved_price": "0",
+     "expiration_utc": "2026-06-01T06:00:05Z",
+     "proposal_time_utc_derived": "2026-06-01T04:00:05Z",
+     "reward_usdc": "0.0",
+     "final_fee_usdc": "250.0"
+    },
+    {
+     "request_timestamp_utc": "2026-06-01T04:12:20Z",
+     "settled": true,
+     "bond_usdc": "500.0",
+     "custom_liveness_s": "0",
+     "proposed_price": "0",
+     "resolved_price": "0",
+     "expiration_utc": "2026-06-01T06:12:53Z",
+     "proposal_time_utc_derived": "2026-06-01T04:12:53Z",
+     "reward_usdc": "0.0",
+     "final_fee_usdc": "250.0"
+    }
+   ],
+   "proposals": [
+    {
+     "time_utc": "2026-06-01T04:00:05Z",
+     "price": "0",
+     "tx": "0x2ff870a45d2de518672af34d8d7711fab1c14d7851db86869e3603d22f13a34c"
+    },
+    {
+     "time_utc": "2026-06-01T04:12:53Z",
+     "price": "0",
+     "tx": "0xf2f9d6feed22bbb12cc85b8661af7262c6694d33529ad31babb1d88a93444aff"
+    }
+   ],
+   "disputes": [
+    {
+     "time_utc": "2026-06-01T04:12:20Z",
+     "disputed_price": "0",
+     "tx": "0xc5e63a7828b193232c33cb93db44b2f1c05f017c4bfe16d54078be560ae25aab"
+    },
+    {
+     "time_utc": "2026-06-01T04:53:01Z",
+     "disputed_price": "0",
+     "tx": "0xbcbd0d858e43a073bd64b334577c088b72e6dde8b1a9184de658108b0d2a377e"
+    }
+   ]
+  },
+  "dvm_vote": {
+   "chain": "Ethereum",
+   "contract": "0x004395edb43efca9885cedad51ec9faf93bd34ac",
+   "round_id": "10303",
+   "request_link_proof": "L1 ancillaryDataHash == keccak256(L2 ancillary + ',ooRequester:' + adapter) (checked: true); childBlockNumber == Polygon dispute block",
+   "l1_ancillary": "ancillaryDataHash:7b44b4ef2ded33c2d4b51cc286160afcc6d713f9bf5ada6578fc0e07eb7e52fc,childBlockNumber:87742777,childOracle:ac60353a54873c446101216829a6a98cdbbc3f3d,childRequester:2c0367a9db231ddebd88a94b4f6461a6e47c58b1,childChainId:137",
+   "result_price": "0",
+   "result": "No",
+   "share_of_revealed_tokens_No": "0.98611",
+   "share_of_revealed_tokens_Yes": "0.01389",
+   "reveals_total": "607",
+   "revealed_tokens_UMA": "19433398.3",
+   "resolved_utc": "2026-06-04T00:00:35Z",
+   "resolved_tx": "0xc50ff080715b8fded2658cf8ccfd31994f8c3f56d58f238e98e1b9fa70f37f78",
+   "note": "aggregates only; per-voter data intentionally not included"
+  },
+  "market_context": {
+   "venue_reported_volume_usd_gamma": "375813105",
+   "press_reported_volume_usd": [
+    "60M (cryptotimes.io)",
+    "80M (cointelegraph)",
+    "85M (kucoin/thedefiant)",
+    "118M (nulltx)"
+   ],
+   "volume_note": "venue figure (gamma volumeClob) and press figures disagree by 3-6x; methodology of the venue figure is not published",
+   "yes_price_path_clob": {
+    "at_deadline": "0.1155",
+    "before_8k_12:00Z": "0.116",
+    "max_after_8k": "0.812 (12:20Z)",
+    "before_clarification_16:50Z": "0.5525",
+    "ten_minutes_after_clarification_17:10Z": "0.0005",
+    "at_dvm_resolution": "0.0015"
+   },
+   "sibling_markets_same_event": [
+    {
+     "market_id": "516926",
+     "question": "MicroStrategy sells any Bitcoin in 2025?",
+     "outcome_prices": "[\"0\", \"1\"]",
+     "uma_statuses": "[\"proposed\", \"disputed\", \"proposed\", \"disputed\"]",
+     "venue_reported_volume_usd": "17976158"
+    },
+    {
+     "market_id": "692250",
+     "question": "MicroStrategy sells any Bitcoin by March 31, 2026?",
+     "outcome_prices": "[\"0\", \"1\"]",
+     "uma_statuses": "[\"proposed\"]",
+     "venue_reported_volume_usd": "2710380"
+    },
+    {
+     "market_id": "692258",
+     "question": "MicroStrategy sells any Bitcoin by June 30, 2026?",
+     "outcome_prices": "[\"1\", \"0\"]",
+     "uma_statuses": "[\"proposed\"]",
+     "venue_reported_volume_usd": "8418661"
+    },
+    {
+     "market_id": "824952",
+     "question": "MicroStrategy sells any Bitcoin by December 31, 2026?",
+     "outcome_prices": "[\"1\", \"0\"]",
+     "uma_statuses": "[\"proposed\"]",
+     "venue_reported_volume_usd": "2252109"
+    }
+   ]
+  },
+  "cross_venue_rule_reference": {
+   "venue": "Kalshi",
+   "series": "KXMSTRSELL 'Will MicroStrategy sell any Bitcoin before date'",
+   "template": "EVENTCONFIRMED",
+   "underlying_text": "whether <event claim> is reported as confirmed or verified by a Source Agency after Issuance and before <date>",
+   "template_pdf_sha256": "2c81e635370230fec746a808940f16c9747347eb7b18742d06dcbd0d62f999a4",
+   "listed_contracts_found": "0 (live + historical API, 2026-10-03)",
+   "reading": "Kalshi's template for the same question type is confirmation-based by wording; Polymarket's original wording was occurrence-based and the confirmation requirement appeared only in the 17:00Z bulletin."
+  },
+  "findings": [
+   "F1. The rules written at creation (on-chain ancillary data, 2026-05-05) make Yes depend on a sale happening by the deadline; they do not say whether evidence published after the deadline counts.",
+   "F2. Strategy's own 8-K (EDGAR accepted 2026-06-01 12:00:16Z) reports 32 BTC sold during May 26-31, 2026, i.e. inside the window; the disclosure itself came ~8 h after the deadline.",
+   "F3. Both 'No' proposals were disputed before the 8-K was public (04:12Z and 04:53Z), so the case went to the UMA DVM.",
+   "F4. The clause 'Confirmation achieved outside of the market's time frame does not qualify' first appears on-chain at 2026-06-01T17:00:16Z: 13.0 h after the deadline, 5.0 h after the 8-K and after both disputes.",
+   "F5. The UMA DVM resolved No with 98.61% of revealed tokens (607 reveals, 19.43M UMA); the market settled No on 2026-06-04T00:34:19Z.",
+   "F6. Two sibling markets of the same event (June 30, Dec 31) resolved Yes on the same sale.",
+   "F7. YES traded 11.6c at the deadline and 11.6c at 11:50Z, peaked at 81.2c at 12:20Z (20 min after the 8-K), traded 55.3c just before the clarification and 0.05c ten minutes after it (CLOB price history, 10-min points).",
+   "F8. Both bulletin updates were posted from a Polymarket operator account other than the question's initializer; the adapter's bulletin-board getter for the initializer returns no updates for this question."
+  ],
+  "not_claimed": "This pack states public facts and their order. It does not allege wrongdoing by any person, and contains no trader, proposer, disputer or voter identities.",
+  "sources": [
+   {
+    "what": "Polygon on-chain logs and receipts (adapter, MOOV2, CTF)",
+    "how": "eth_getLogs/eth_getTransactionReceipt via public RPC; tx hashes above"
+   },
+   {
+    "what": "Ethereum UMA VotingV2 logs",
+    "how": "eth_getLogs via public RPC; resolved_tx above"
+   },
+   {
+    "what": "Polymarket gamma event 16167",
+    "url": "https://gamma-api.polymarket.com/events/16167",
+    "fetched_utc": "2026-10-02T22:47Z",
+    "sha256": "3f2b7076a78edc2e8e9785436ba4b04638d22b459357c0305ab857be3c24ec43"
+   },
+   {
+    "what": "Polymarket CLOB price history (YES token)",
+    "url": "https://clob.polymarket.com/prices-history",
+    "fetched_utc": "2026-10-02T23:3xZ"
+   },
+   {
+    "what": "SEC EDGAR filing index 0001193125-26-249768",
+    "url": "https://www.sec.gov/Archives/edgar/data/1050446/000119312526249768/0001193125-26-249768-index.htm"
+   },
+   {
+    "what": "Kalshi series KXMSTRSELL + EVENTCONFIRMED terms",
+    "url": "https://assets.kalshi.com/contract_terms/EVENTCONFIRMED.pdf"
+   }
+  ],
+  "recompute": "python3 src/strategy_collect.py && python3 src/dvm_collect.py (read-only RPC) reproduce every on-chain field; python3 src/verify_pack.py <pack> --onchain re-checks them live"
+ },
+ "verify": "ed25519: verify `signature` (hex, 64 bytes) over the UTF-8 bytes of `canonical` using `public_key` (hex, raw 32-byte ed25519 point). `canonical` is JSON with keys sorted lexicographically at every level and no insignificant whitespace (subset of RFC 8785 / JCS); every scalar in the payload is a string, boolean or null. Re-canonicalise `payload` and you MUST reproduce `canonical`. content_hash = sha256(canonical)."
+}
