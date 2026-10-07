@@ -6,7 +6,6 @@
   "description": "Predge Settlement Guard: signed settlement-risk attestations for prediction markets, verified on Solana",
   "scripts": {
     "build:data": "ts-node scripts/build-dataset.ts",
-    "attest": "ts-node scripts/attest.ts",
     "demo": "ts-node scripts/demo.ts",
     "test": "anchor test",
     "test:unit": "ts-mocha -p ./tsconfig.json -t 60000 tests/attestation.spec.ts tests/api-record.spec.ts",
