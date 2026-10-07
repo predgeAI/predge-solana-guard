@@ -150,7 +150,7 @@ Requirements: Rust, [Agave/Solana CLI](https://docs.anza.xyz/cli/install) 2.x or
 ```bash
 npm install
 anchor build
-anchor test          # local validator: 26 tests (guard program, CPI vault, off-chain checks)
+anchor test          # local validator: 33 tests (guard program, CPI vault, off-chain checks)
 npm run test:unit    # off-chain only: encoding, dataset numbers, signed API record verification
 cargo test           # Rust unit tests
 npx ts-node scripts/stats.ts   # recomputes 3,005 / 2,666 / 323 / 2,543 / 853
