@@ -1,0 +1,28 @@
+[package]
+name = "example_consumer"
+version = "0.1.0"
+description = "Example consumer: a settlement vault that calls predge_guard::check_settlement via CPI before releasing funds"
+edition = "2021"
+license = "MIT"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "example_consumer"
+
+[features]
+default = []
+cpi = ["no-entrypoint"]
+no-entrypoint = []
+no-idl = []
+no-log-ix-name = []
+idl-build = ["anchor-lang/idl-build", "predge_guard/idl-build"]
+custom-heap = []
+custom-panic = []
+anchor-debug = []
+
+[dependencies]
+anchor-lang = "0.32.1"
+predge_guard = { path = "../predge_guard", features = ["cpi"] }
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(target_os, values("solana"))'] }

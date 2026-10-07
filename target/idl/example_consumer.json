@@ -1,0 +1,381 @@
+{
+  "address": "6HSBJp8n4wM3RdjbbJY5XoKkBAH16HL8hEPbgk1RwUpg",
+  "metadata": {
+    "name": "example_consumer",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Example consumer: a settlement vault that calls predge_guard::check_settlement via CPI before releasing funds"
+  },
+  "instructions": [
+    {
+      "name": "deposit",
+      "docs": [
+        "Lock `amount` lamports for `beneficiary` until the market behind",
+        "`market_key` is final according to Predge Settlement Guard."
+      ],
+      "discriminator": [
+        242,
+        35,
+        198,
+        137,
+        82,
+        225,
+        242,
+        182
+      ],
+      "accounts": [
+        {
+          "name": "depositor",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "beneficiary"
+        },
+        {
+          "name": "vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "depositor"
+              },
+              {
+                "kind": "arg",
+                "path": "vault_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "vault_id",
+          "type": "u64"
+        },
+        {
+          "name": "market_key",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        },
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "release",
+      "docs": [
+        "Release the vault to the beneficiary, but only after the guard says the",
+        "reference market is final."
+      ],
+      "discriminator": [
+        253,
+        249,
+        15,
+        206,
+        28,
+        127,
+        193,
+        241
+      ],
+      "accounts": [
+        {
+          "name": "caller",
+          "docs": [
+            "Anyone may trigger release; funds can only go to the beneficiary."
+          ],
+          "signer": true
+        },
+        {
+          "name": "vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "vault.depositor",
+                "account": "Vault"
+              },
+              {
+                "kind": "account",
+                "path": "vault.vault_id",
+                "account": "Vault"
+              }
+            ]
+          }
+        },
+        {
+          "name": "beneficiary",
+          "writable": true,
+          "relations": [
+            "vault"
+          ]
+        },
+        {
+          "name": "guard_config",
+          "docs": [
+            "Predge Settlement Guard config PDA (owner-checked as a guard account;",
+            "its seeds are re-checked inside `check_settlement`)."
+          ]
+        },
+        {
+          "name": "market_risk",
+          "docs": [
+            "The reference market's risk record. It must be the one this vault",
+            "was opened against; the guard re-checks its PDA seeds."
+          ]
+        },
+        {
+          "name": "predge_guard",
+          "address": "B2gNjSeDBWHoLG3qdnsKVv5mqYMAZ3cULyCY4AZ3Jush"
+        }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Config",
+      "discriminator": [
+        155,
+        12,
+        170,
+        224,
+        30,
+        250,
+        204,
+        130
+      ]
+    },
+    {
+      "name": "MarketRisk",
+      "discriminator": [
+        239,
+        210,
+        123,
+        246,
+        232,
+        219,
+        139,
+        238
+      ]
+    },
+    {
+      "name": "Vault",
+      "discriminator": [
+        211,
+        8,
+        232,
+        43,
+        2,
+        152,
+        117,
+        119
+      ]
+    }
+  ],
+  "events": [
+    {
+      "name": "VaultReleased",
+      "discriminator": [
+        71,
+        205,
+        57,
+        90,
+        244,
+        213,
+        241,
+        226
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "InvalidAmount",
+      "msg": "Amount must be positive"
+    },
+    {
+      "code": 6001,
+      "name": "WrongMarket",
+      "msg": "MarketRisk account is not for this vault's market"
+    }
+  ],
+  "types": [
+    {
+      "name": "Config",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "admin",
+            "type": "pubkey"
+          },
+          {
+            "name": "attestor",
+            "type": "pubkey"
+          },
+          {
+            "name": "cooling_secs",
+            "type": "i64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "MarketRisk",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "market_key",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "status",
+            "type": "u8"
+          },
+          {
+            "name": "dispute_count",
+            "type": "u8"
+          },
+          {
+            "name": "settled_differently",
+            "type": "u8"
+          },
+          {
+            "name": "risk_bps",
+            "type": "u16"
+          },
+          {
+            "name": "settled_at",
+            "type": "i64"
+          },
+          {
+            "name": "observed_at",
+            "type": "i64"
+          },
+          {
+            "name": "evidence_hash",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "updated_slot",
+            "type": "u64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Vault",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "depositor",
+            "type": "pubkey"
+          },
+          {
+            "name": "beneficiary",
+            "type": "pubkey"
+          },
+          {
+            "name": "market_key",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "vault_id",
+            "type": "u64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "VaultReleased",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "vault",
+            "type": "pubkey"
+          },
+          {
+            "name": "market_key",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          }
+        ]
+      }
+    }
+  ]
+}

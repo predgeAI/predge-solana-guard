@@ -8,9 +8,11 @@ skip-lint = false
 
 [programs.localnet]
 predge_guard = "B2gNjSeDBWHoLG3qdnsKVv5mqYMAZ3cULyCY4AZ3Jush"
+example_consumer = "6HSBJp8n4wM3RdjbbJY5XoKkBAH16HL8hEPbgk1RwUpg"
 
 [programs.devnet]
 predge_guard = "B2gNjSeDBWHoLG3qdnsKVv5mqYMAZ3cULyCY4AZ3Jush"
+example_consumer = "6HSBJp8n4wM3RdjbbJY5XoKkBAH16HL8hEPbgk1RwUpg"
 
 [provider]
 cluster = "localnet"
