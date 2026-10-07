@@ -52,3 +52,13 @@ describe("api.predge.io signed record", () => {
     expect(currentAttestation(v).status).to.eq(Status.ESCALATED);
   });
 });
+
+describe("api.predge.io record for a market Jupiter Predict lists (POLY-1484949)", () => {
+  it("verifies and maps two disputes to DISPUTED, ESCALATED, then SETTLED", () => {
+    const r: ApiRecord = JSON.parse(readFileSync("examples/api-settlement-risk-1484949.json", "utf8"));
+    const v = verifyApiRecord(r);
+    const t = timelineAttestations(v, { settledAt: toUnix("2026-04-05T06:13:09Z") });
+    expect(t.map((a) => a.status)).to.deep.eq([Status.DISPUTED, Status.ESCALATED, Status.SETTLED]);
+    expect(t[2].settledDifferently).to.eq(0);
+  });
+});

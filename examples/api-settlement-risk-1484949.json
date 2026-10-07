@@ -1,0 +1,119 @@
+{
+    "market": {
+        "market_id": "1484949",
+        "condition_id": "0x7cb525e831729325d651017f81cbcb6f1adde5011c7b2283babea00b4ae93ae7",
+        "slug": "netanyahu-out-by-march-31-854",
+        "question": "Netanyahu out by March 31?",
+        "uma_question_id": "0x08b9a3c692e25cf126ba3ee491e2cb0b6139a9d611b22b92e0cfd8669cf19f52",
+        "adapter": "0x65070be91477460d8a7aeeb94ef92fe056c2f2a7",
+        "neg_risk": false,
+        "closed": true,
+        "end_date": "2026-04-01T03:59:00Z"
+    },
+    "adapter": "0x65070be91477460d8a7aeeb94ef92fe056c2f2a7",
+    "adapter_label": "UmaCtfAdapter (Managed OOV2)",
+    "oracle": "0x2c0367a9db231ddebd88a94b4f6461a6e47c58b1",
+    "uma_state": "settled",
+    "resolved_on_chain": true,
+    "paused": false,
+    "dispute_count": 2,
+    "open_dispute": false,
+    "sent_to_uma_vote": false,
+    "current_proposal": null,
+    "disputes": [
+        {
+            "disputed_at": "2026-04-01T04:06:47Z",
+            "tx": "0x9d8446ba2a6102df462f2c1f30fbe724a07737564cb3e5d70892437ba5b6996f",
+            "disputed_proposal": "No"
+        },
+        {
+            "disputed_at": "2026-04-01T04:11:07Z",
+            "tx": "0xfffd18d26d077c4c95053ff21f82537423beecc14f1d4a6913deb811e5d462a5",
+            "disputed_proposal": "No"
+        }
+    ],
+    "bulletin_board": {
+        "count": 1,
+        "latest": {
+            "posted_at": "2026-03-18T23:56:43Z",
+            "poster": "question_creator",
+            "kind": "clarification",
+            "text": "This market's language has been updated for clarity."
+        }
+    },
+    "onchain_resolution": {
+        "outcome": "No"
+    },
+    "checked_at": "2026-10-07T11:33:06Z",
+    "risk_level": "resolved",
+    "recommendation": "resolved: the on-chain resolution is final (No); nothing is left to settle.",
+    "context": {
+        "period": "2026-01-01 to 2026-10-02",
+        "source": "UMA Optimistic Oracle and Polymarket UMA CTF adapter logs on Polygon, scanned by Predge",
+        "disputes": 3005,
+        "disputed_markets": 2666,
+        "disputed_twice_or_more": 323,
+        "settled_disputed_markets": 2543,
+        "settled_differently_from_disputed_proposal": 853,
+        "settled_differently_share": "33.5%",
+        "median_hours_first_dispute_to_onchain_resolution": "3.3",
+        "median_hours_second_dispute_to_onchain_resolution": "88.5",
+        "note": "A dispute blocks a proposal; it does not by itself change the outcome. A second dispute sends the outcome to a UMA token-holder vote."
+    },
+    "data_basis": "Live read of UMA's Optimistic Oracle and Polymarket's UMA CTF adapter on Polygon (eth_call and eth_getLogs on public RPC) at checked_at. uma_question_id, dispute times and txs, bulletin-board updates and the on-chain resolution are chain facts, re-checkable on any Polygon RPC. The market lookup (condition id, market id, slug to UMA question id) uses Polymarket's public gamma API and is re-checked on chain: keccak256(ancillaryData) equals uma_question_id. Only the question creator's and the venue operator accounts' bulletin-board posts are counted. risk_level and recommendation are Predge's reading of those facts, not advice. The signature proves Predge published this record.",
+    "attestation": {
+        "version": "predge-attest-v1",
+        "issuer": "predge.io",
+        "algorithm": "ed25519",
+        "kind": "settlement-risk",
+        "data_basis": "Live read of UMA's Optimistic Oracle and Polymarket's UMA CTF adapter on Polygon (eth_call and eth_getLogs on public RPC) at checked_at. uma_question_id, dispute times and txs, bulletin-board updates and the on-chain resolution are chain facts, re-checkable on any Polygon RPC. The market lookup (condition id, market id, slug to UMA question id) uses Polymarket's public gamma API and is re-checked on chain: keccak256(ancillaryData) equals uma_question_id. Only the question creator's and the venue operator accounts' bulletin-board posts are counted. risk_level and recommendation are Predge's reading of those facts, not advice. The signature proves Predge published this record.",
+        "public_key": "13fa3d18a369e6c71bf941563ba47822b30182273d5106a0e8fb61c5016352d9",
+        "canonical": "{\"adapter\":\"0x65070be91477460d8a7aeeb94ef92fe056c2f2a7\",\"bulletin_board_count\":\"1\",\"chain\":\"polygon\",\"checked_at\":\"2026-10-07T11:33:06Z\",\"condition_id\":\"0x7cb525e831729325d651017f81cbcb6f1adde5011c7b2283babea00b4ae93ae7\",\"current_proposal\":null,\"dispute_count\":\"2\",\"disputes\":[{\"disputed_at\":\"2026-04-01T04:06:47Z\",\"disputed_proposal\":\"No\",\"tx\":\"0x9d8446ba2a6102df462f2c1f30fbe724a07737564cb3e5d70892437ba5b6996f\"},{\"disputed_at\":\"2026-04-01T04:11:07Z\",\"disputed_proposal\":\"No\",\"tx\":\"0xfffd18d26d077c4c95053ff21f82537423beecc14f1d4a6913deb811e5d462a5\"}],\"issued_at\":\"2026-10-07T11:33:10.695Z\",\"issuer\":\"predge.io\",\"kind\":\"settlement-risk\",\"latest_bulletin_board_update\":{\"kind\":\"clarification\",\"posted_at\":\"2026-03-18T23:56:43Z\",\"poster\":\"question_creator\"},\"market_id\":\"1484949\",\"onchain_resolution\":{\"outcome\":\"No\"},\"open_dispute\":false,\"oracle\":\"0x2c0367a9db231ddebd88a94b4f6461a6e47c58b1\",\"paused\":false,\"platform\":\"polymarket\",\"recommendation\":\"resolved: the on-chain resolution is final (No); nothing is left to settle.\",\"resolved_on_chain\":true,\"risk_level\":\"resolved\",\"sent_to_uma_vote\":false,\"uma_question_id\":\"0x08b9a3c692e25cf126ba3ee491e2cb0b6139a9d611b22b92e0cfd8669cf19f52\",\"uma_state\":\"settled\",\"version\":\"predge-attest-v1\"}",
+        "signature": "59734777784a2287b39772229a2949f83aa0746f859b4747dbbf10606dc59eed63c0fe46664ddd508595cf2a595b97d6f39ed47b379e54ba2bfbf565f4b47407",
+        "payload": {
+            "version": "predge-attest-v1",
+            "issuer": "predge.io",
+            "kind": "settlement-risk",
+            "platform": "polymarket",
+            "chain": "polygon",
+            "market_id": "1484949",
+            "condition_id": "0x7cb525e831729325d651017f81cbcb6f1adde5011c7b2283babea00b4ae93ae7",
+            "uma_question_id": "0x08b9a3c692e25cf126ba3ee491e2cb0b6139a9d611b22b92e0cfd8669cf19f52",
+            "adapter": "0x65070be91477460d8a7aeeb94ef92fe056c2f2a7",
+            "oracle": "0x2c0367a9db231ddebd88a94b4f6461a6e47c58b1",
+            "uma_state": "settled",
+            "resolved_on_chain": true,
+            "paused": false,
+            "dispute_count": "2",
+            "open_dispute": false,
+            "sent_to_uma_vote": false,
+            "current_proposal": null,
+            "disputes": [
+                {
+                    "disputed_at": "2026-04-01T04:06:47Z",
+                    "tx": "0x9d8446ba2a6102df462f2c1f30fbe724a07737564cb3e5d70892437ba5b6996f",
+                    "disputed_proposal": "No"
+                },
+                {
+                    "disputed_at": "2026-04-01T04:11:07Z",
+                    "tx": "0xfffd18d26d077c4c95053ff21f82537423beecc14f1d4a6913deb811e5d462a5",
+                    "disputed_proposal": "No"
+                }
+            ],
+            "bulletin_board_count": "1",
+            "latest_bulletin_board_update": {
+                "posted_at": "2026-03-18T23:56:43Z",
+                "poster": "question_creator",
+                "kind": "clarification"
+            },
+            "onchain_resolution": {
+                "outcome": "No"
+            },
+            "risk_level": "resolved",
+            "recommendation": "resolved: the on-chain resolution is final (No); nothing is left to settle.",
+            "checked_at": "2026-10-07T11:33:06Z",
+            "issued_at": "2026-10-07T11:33:10.695Z"
+        },
+        "verify": "ed25519: verify `signature` (hex, 64 bytes) over the UTF-8 bytes of `canonical` using `public_key` (hex, raw 32-byte ed25519 point). `canonical` is the exact byte string that was signed \u2014 JSON with keys sorted lexicographically at every level and no insignificant whitespace (a subset of RFC 8785 / JCS). `payload` is the same object parsed; re-canonicalise it and you MUST reproduce `canonical`. If `payload.payment` is present it names the x402 payment that bought this response. On `payment.network`, find the `AuthorizationUsed(payer, nonce)` log emitted by `payment.asset`; in that same transaction receipt (not just the same block) require status 1 and a `Transfer(payer, payTo, amount)` log from `payment.asset`. Those arguments are the fields of `payment` with the same names."
+    }
+}

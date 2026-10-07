@@ -2,7 +2,7 @@
 //
 //   ANCHOR_PROVIDER_URL=https://api.devnet.solana.com \
 //   ANCHOR_WALLET=~/.config/solana/predge-devnet.json \
-//   npx ts-node scripts/api-demo.ts [polymarket_market_id]     (default 2169995)
+//   npx ts-node scripts/api-demo.ts [polymarket_market_id]     (default 1484949)
 //
 // 1. GET https://api.predge.io/v1/settlement-risk/<id> and verify the ed25519
 //    signature against Predge's pinned attestation key, byte for byte.
@@ -15,6 +15,8 @@
 //    attempts are sent with preflight off, so they land on-chain as failed
 //    transactions with the guard's error code, viewable in the explorer.
 // 4. Post the current signed state under the market's canonical key.
+// 5. Show how the same market is exposed on Solana through Jupiter Predict
+//    (Jupiter market id POLY-<polymarket market id>), when Jupiter lists it.
 //
 // Note on keys: the API signs JSON with Predge's API key. The program verifies
 // the compact 97-byte message against the attestor key in its config. Here the
@@ -23,6 +25,7 @@
 import * as anchor from "@coral-xyz/anchor";
 import { Program } from "@coral-xyz/anchor";
 import {
+  ComputeBudgetProgram,
   Keypair,
   LAMPORTS_PER_SOL,
   PublicKey,
@@ -41,6 +44,16 @@ import { ApiRecord, PREDGE_API_KEY_HEX, timelineAttestations, verifyApiRecord } 
 import { Attestation, DisputeRecord, STATUS_NAME, ed25519Ix, pda, sha256, signAttestation, toAnchorArg, toUnix } from "./lib";
 
 const API = process.env.PREDGE_API ?? "https://api.predge.io";
+const JUPITER = process.env.JUPITER_PREDICTION_API ?? "https://api.jup.ag/prediction/v1";
+
+async function jupiterMarket(id: string): Promise<any | null> {
+  try {
+    const res = await fetch(`${JUPITER}/markets/POLY-${encodeURIComponent(id)}`);
+    return res.ok ? await res.json() : null;
+  } catch {
+    return null;
+  }
+}
 const COOLING_SECS = Number(process.env.COOLING_SECS ?? 3600);
 
 function loadAttestor(): nacl.SignKeyPair {
@@ -62,7 +75,7 @@ async function fetchRecord(id: string): Promise<ApiRecord> {
 }
 
 async function main() {
-  const marketId = process.argv[2] ?? "2169995";
+  const marketId = process.argv[2] ?? "1484949";
   const provider = anchor.AnchorProvider.env();
   anchor.setProvider(provider);
   const guard = new Program<PredgeGuard>(guardIdl as any, provider);
@@ -139,8 +152,11 @@ async function main() {
   };
 
   // Send with preflight off so a blocked attempt is recorded on-chain.
+  // A distinct compute limit per attempt keeps repeated identical release
+  // attempts from colliding on the same signature within one blockhash.
+  let attemptNo = 0;
   const attempt = async (ix: TransactionInstruction): Promise<{ ok: boolean; code: string; sig: string }> => {
-    const tx = new Transaction().add(ix);
+    const tx = new Transaction().add(ComputeBudgetProgram.setComputeUnitLimit({ units: 200_000 + ++attemptNo }), ix);
     const sig = await conn.sendTransaction(tx, [payer], { skipPreflight: true });
     const bh = await conn.getLatestBlockhash();
     await conn.confirmTransaction({ signature: sig, ...bh }, "confirmed");
@@ -213,6 +229,16 @@ async function main() {
   } else {
     const sig = await post(current);
     console.log(`\nCanonical record ${riskPda(current.marketKey).toBase58()}  ${STATUS_NAME[current.status]}  ${link(sig)}`);
+  }
+
+  // 5. The same market on Solana, via Jupiter Predict.
+  const jup = await jupiterMarket(p.market_id);
+  if (jup) {
+    console.log(`\nJupiter Predict: ${jup.marketId} (provider ${jup.provider}), status ${jup.status}, result ${jup.result ?? "-"}, resolveAt ${jup.resolveAt ?? "-"}`);
+    if (jup.marketResultPubkey) console.log(`  result account on Solana mainnet: https://explorer.solana.com/address/${jup.marketResultPubkey}`);
+    console.log(`  Polygon on-chain outcome (signed by Predge): ${p.onchain_resolution?.outcome ?? "not resolved"}`);
+  } else {
+    console.log(`\nJupiter Predict: POLY-${p.market_id} not returned by ${JUPITER}`);
   }
 }
 
