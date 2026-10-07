@@ -134,14 +134,25 @@ Jupiter Predict: POLY-1484949 (provider polymarket), status closed, result no, r
 
 ## Devnet
 
-Status on 7 Oct 2026: **deployment pending, program IDs reserved.** The public devnet faucet rate-limited the deployer (`DiuuxHaMcezcWLUkmnTYUQPwi7tV46aZWHCZabTy9Rhg`), so neither program is on devnet yet. Everything above runs end to end on a local validator today.
+Status on 7 Oct 2026: **both programs are live on devnet.**
 
 | | Program ID | Explorer (devnet) |
 |---|---|---|
 | Guard | `B2gNjSeDBWHoLG3qdnsKVv5mqYMAZ3cULyCY4AZ3Jush` | [link](https://explorer.solana.com/address/B2gNjSeDBWHoLG3qdnsKVv5mqYMAZ3cULyCY4AZ3Jush?cluster=devnet) |
 | Example consumer | `6HSBJp8n4wM3RdjbbJY5XoKkBAH16HL8hEPbgk1RwUpg` | [link](https://explorer.solana.com/address/6HSBJp8n4wM3RdjbbJY5XoKkBAH16HL8hEPbgk1RwUpg?cluster=devnet) |
 
-Once funded (about 2.6 SOL peak for the guard, about 3.3 SOL to deploy both), `./scripts/deploy-devnet.sh` deploys and writes `demo-api-devnet.log` and `demo-devnet.log` with explorer links for every transaction; those links will be listed here.
+API-to-gate demo on devnet for Polymarket market 1484949 ("Netanyahu out by March 31?", listed on Jupiter Predict), replaying its signed dispute path:
+
+| Step | Market status | Transaction |
+|---|---|---|
+| post attestation | DISPUTED (1 dispute) | [tx](https://explorer.solana.com/tx/5HNs2DCpamJvwQ9rzKqDa8MKWMPQnrUsWWtxzuucbmsW5wTRi9pPEXPEqCW6Qje4pgZNKrvjjE3pEr3qAGCk1J97?cluster=devnet) |
+| vault release via CPI | **blocked: `MarketDisputed`** | [tx](https://explorer.solana.com/tx/sMjYjv6WARh1j6LEwpthSyKsgo5GM23NLhNGY57NhKzdUQkrLJrkSkPiePe3NcLGeJs7QDQBapw2Pkm8bqkzths?cluster=devnet) |
+| post attestation | ESCALATED to UMA vote (2 disputes) | [tx](https://explorer.solana.com/tx/5gpyR3NDj2ihj5XwkZfgWev6rqnGD62937eLX8bxcKyeV96UYVcSpgAuMajRupKSgoFSiv6Qp1ui3hqF6ngwmXQt?cluster=devnet) |
+| vault release via CPI | **blocked: `MarketEscalated`** | [tx](https://explorer.solana.com/tx/2gyNm6dzmV3fz8m4SrUvqHjdzxksD5PoieG7C3MBaHc65m672KGn56aVJ3uDQHimfyBdjNVPbRot9GhrgAWC575Q?cluster=devnet) |
+| post attestation | SETTLED | [tx](https://explorer.solana.com/tx/2FqF4mMKjBEFLuV8mH4zYBjz87vjEa9UMNzeCwxZMQaF7yWQzzkmn8Egn6UmZVHs5nNbBWPhqwCYbq2gJhh6y59K?cluster=devnet) |
+| vault release via CPI | **allowed** | [tx](https://explorer.solana.com/tx/5XEU64ZR3eDumfsL7FuCmxikpGN5bDcfDjHXRUeVPjFNbPqLYSWjJxkNuvPexjbd749rJr8R2T95D3wDVx9Mx2Ui?cluster=devnet) |
+
+Jupiter Predict lists the same market (provider polymarket, result no); its result account on Solana mainnet: [BzM3HV…hYhe](https://explorer.solana.com/address/BzM3HVUvVByzG3Jb6neiTVzpAxZcJxkXGLLASKWEbYhe). Full logs: `demo-api-devnet.log`, `demo-devnet.log`.
 
 ## Run it
 

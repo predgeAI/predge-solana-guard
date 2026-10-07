@@ -1,0 +1,34 @@
+program   B2gNjSeDBWHoLG3qdnsKVv5mqYMAZ3cULyCY4AZ3Jush
+payer     DiuuxHaMcezcWLUkmnTYUQPwi7tV46aZWHCZabTy9Rhg  (2.731464148 SOL)
+attestor  FZi4ZmNsFN2E4VxXJLks8VUXFRihk97fsAQYYwAhJTyp
+
+Replay: "MicroStrategy sells any Bitcoin by May 31, 2026?" (Polymarket 2169995)
+evidence pack sha256 fed6d15eb50da0c8e08e4a1fd95b767f7d9ced13985e246ede843705454b1f64
+open_escrow 0.01 SOL  https://explorer.solana.com/tx/3n5FpYE4zsFmkajzDjUbuhnWD3T5shxPvQ4gLtUcStTsKstpQpk7Eu2wUg7DtsprBntmYetZC2tVJ2xq72bxfF6G?cluster=devnet
+2026-06-01T04:00:05Z  PROPOSED              risk    0 bps  https://explorer.solana.com/tx/4jPLG46xGBvuXfGDMP5P2zq71rkhyA9z4JzsQMEPghBeYRBswbufM7XFTrNJTMmfQrfwh5S4RDcyc61Zb3Qa138u?cluster=devnet
+    release_escrow -> blocked: SettlementNotFinal
+2026-06-01T04:12:20Z  DISPUTED              risk 3354 bps  https://explorer.solana.com/tx/4R2qCapwA24KXZnAVnmZM3tBKiYwaC1pd3JcrzVai6hZdPfPEYQPRgaWE3N7Qy7Q4TY3frZdkkf9RpyDiWaZFYTv?cluster=devnet
+    release_escrow -> blocked: MarketDisputed
+2026-06-01T04:53:01Z  ESCALATED (UMA vote)  risk 3354 bps  https://explorer.solana.com/tx/2sst5cj3ZRd8FvRB7QSZTXi63vypgYirgUVgNjJdCvcYwpmXjGug2R759Bavp5kaqqfYtqohvjq9vSe9p8MHzc7J?cluster=devnet
+    release_escrow -> blocked: MarketEscalated
+2026-06-04T00:34:19Z  SETTLED               risk    0 bps  https://explorer.solana.com/tx/3s8gY4NAdvRwAAu1GL4fFS3uE3PgJZpZ8kJdPcR1NNkgs6Z91UV9w9rqS3oq3YANkVWgaivd8nA6oGJ3dh2rysaT?cluster=devnet
+    release_escrow -> RELEASED  https://explorer.solana.com/tx/38CCwFCcjUnpfDuAfn4xPZu2Kpz84QhVKAYeKrGyUN49TCmprHV4YuzNX19G5A7JqwJvo342xKAsENQVvJ1vZskk?cluster=devnet
+
+Posting 5 open markets + Strategy (as observed 2026-10-02T22:29:00.000Z)
+  DISPUTED              HANG SENG INDEX (恒生指数) Up or Down on September 28, 2026?  https://explorer.solana.com/tx/NMurHfwEhLz1ynUpo8RKVAM8Z5rfYwozXiyskZDfxyGkiyVn7W5p6Z3cWLRFeK8TJG28ZeRdfTeES5nEoQEEYR8?cluster=devnet
+  ESCALATED (UMA vote)  Will Trump meet with Javier Milei in September 2026?  https://explorer.solana.com/tx/5Gpg967o3sn8GTVPSptuWoUPtSfGKESPa2WF1ohhf2ZdPKpoUJHfEdRSKLKR1qhipdJ6JeZKpFVJsj5TsDMLGsur?cluster=devnet
+  ESCALATED (UMA vote)  Will WTI Crude Oil (WTI) hit (LOW) $90 in September?  https://explorer.solana.com/tx/XEEmqnXTFeHDPBZ6aVWZkTPHVdJjUHYVN7LHniy5Z8bS9PHP6fRKCABBH6M8oHocR7ByRPHGooKNaddGTBeuFwf?cluster=devnet
+  DISPUTED              Adam Idah: 1+ goals + assists  https://explorer.solana.com/tx/3stqxRqEVsnhXJrkNfjZKi6KUh3tRsd8ej6QiUr5Wm1omAvbYuU6ay63dFHQ5u85Gk3ryGWXaTbk3enHtNghBYGK?cluster=devnet
+  DISPUTED              Adam Idah: 1+ assists  https://explorer.solana.com/tx/3sfqNzoMneJDUhC8UwdkYdcL4eVNQVeRm7sZ5Lney3xJRdnZKAsUU6e7cAh92CCiYC6iNy9vh4Ddazwib27AFzB5?cluster=devnet
+  SETTLED               MicroStrategy sells any Bitcoin by May 31, 2026?  https://explorer.solana.com/tx/367fpYMB4xvssgLthtAvaZmMSugwZvei2mT5oHj5tBFrQaJrHjzaqJxezS1HzvbXt9xft7yUMHmCAgrpGji5WxT8?cluster=devnet
+
+On-chain board: 9 MarketRisk accounts
+  4Fd2WsnTGoY9ozCLgpA9ejpQQmmiGsk5FTPM4MyeCkSB  DISPUTED              disputes 1  risk 3354 bps
+  71YMgW4nt5MF17WSQVA2CmpN8e3yNPqCoQ68tosZzywd  DISPUTED              disputes 1  risk 3354 bps
+  9rUREiYqXdF8aRtVJbiDrySo3WZWENRABXEJhgwZM7SM  SETTLED               disputes 2  risk 0 bps
+  9sokfCBeRSLsCiHrSsXNFazXi7bBFpmisdP3RKmx6ytR  SETTLED               disputes 2  risk 0 bps
+  A5TWJMAHbVLNFDJ48dNap1VbiFBzsmxTugi2adChp9u2  SETTLED               disputes 2  risk 0 bps
+  CBUiW8n7Gnb5HJ5ozHURwqheTKiEPruxhygkH2BUdXah  ESCALATED (UMA vote)  disputes 2  risk 3354 bps
+  DDn4AwFGJTeryNcLqnEqUm6k5kShCNznWCCXbPQNAurG  SETTLED               disputes 2  risk 0 bps
+  DjhG3A3fUBZUew84UBqUAVe2USNmdm52G77DwC1g1Yji  ESCALATED (UMA vote)  disputes 2  risk 3354 bps
+  E6qa1jcarVo6YskXpZt2n6uh21Jo7GJVFz32wvTpVbr5  DISPUTED              disputes 1  risk 3354 bps

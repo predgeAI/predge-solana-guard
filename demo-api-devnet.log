@@ -1,0 +1,29 @@
+Market    "Netanyahu out by March 31?" (Polymarket 1484949)
+UMA       question 0x08b9a3c692e25cf126ba3ee491e2cb0b6139a9d611b22b92e0cfd8669cf19f52
+API       https://api.predge.io/v1/settlement-risk/1484949  checked_at 2026-10-07T15:47:23Z
+signature ed25519 OK, signer 13fa3d18a369e6c7... (pinned Predge attestation key)
+state     settled, disputes 2, open_dispute false, resolved true
+evidence  sha256(canonical) = 2d8bcb0c803b08016001edfdc3eb2f534d507603603f43903339fb6943047fcb
+
+program   B2gNjSeDBWHoLG3qdnsKVv5mqYMAZ3cULyCY4AZ3Jush  (cluster devnet)
+payer     DiuuxHaMcezcWLUkmnTYUQPwi7tV46aZWHCZabTy9Rhg  2.746192588 SOL
+attestor  FZi4ZmNsFN2E4VxXJLks8VUXFRihk97fsAQYYwAhJTyp
+initialize               https://explorer.solana.com/tx/3XPAyntmNxeTyVtCWqSFH2qxKhE7JDztKXKkWFT5WDUDTQD8Zd7iVfSB8NLa3NqRzRNEAfLXGEc4uLBrxLba1jog?cluster=devnet
+
+Replay of the signed resolution path (run key 6a9fb19b35d1...)
+vault deposit 0.01 SOL (example_consumer 6HSBJp8n4wM3RdjbbJY5XoKkBAH16HL8hEPbgk1RwUpg)  https://explorer.solana.com/tx/4EhoSsHDsRRh8xhkwFZYaqJvKpW7jN1vxiJhbPJhUqgEauDfxGdYmoVnY83NDXRXHFFpgsAbET6U2gRUDMBKWpVi?cluster=devnet
+2026-04-01T04:06:47Z  DISPUTED              disputes 1  risk 3354 bps
+    post_attestation        https://explorer.solana.com/tx/5HNs2DCpamJvwQ9rzKqDa8MKWMPQnrUsWWtxzuucbmsW5wTRi9pPEXPEqCW6Qje4pgZNKrvjjE3pEr3qAGCk1J97?cluster=devnet
+    vault.release (CPI)     BLOCKED MarketDisputed  https://explorer.solana.com/tx/sMjYjv6WARh1j6LEwpthSyKsgo5GM23NLhNGY57NhKzdUQkrLJrkSkPiePe3NcLGeJs7QDQBapw2Pkm8bqkzths?cluster=devnet
+2026-04-01T04:11:07Z  ESCALATED (UMA vote)  disputes 2  risk 3354 bps
+    post_attestation        https://explorer.solana.com/tx/5gpyR3NDj2ihj5XwkZfgWev6rqnGD62937eLX8bxcKyeV96UYVcSpgAuMajRupKSgoFSiv6Qp1ui3hqF6ngwmXQt?cluster=devnet
+    vault.release (CPI)     BLOCKED MarketEscalated  https://explorer.solana.com/tx/2gyNm6dzmV3fz8m4SrUvqHjdzxksD5PoieG7C3MBaHc65m672KGn56aVJ3uDQHimfyBdjNVPbRot9GhrgAWC575Q?cluster=devnet
+2026-10-07T15:47:23Z  SETTLED               disputes 2  risk    0 bps
+    post_attestation        https://explorer.solana.com/tx/2FqF4mMKjBEFLuV8mH4zYBjz87vjEa9UMNzeCwxZMQaF7yWQzzkmn8Egn6UmZVHs5nNbBWPhqwCYbq2gJhh6y59K?cluster=devnet
+    vault.release (CPI)     ALLOWED  https://explorer.solana.com/tx/5XEU64ZR3eDumfsL7FuCmxikpGN5bDcfDjHXRUeVPjFNbPqLYSWjJxkNuvPexjbd749rJr8R2T95D3wDVx9Mx2Ui?cluster=devnet
+
+Canonical record DDn4AwFGJTeryNcLqnEqUm6k5kShCNznWCCXbPQNAurG  SETTLED  https://explorer.solana.com/tx/33ME7gi7mWpBDHbzhMRSS2bcwfD61PvVLwqCp57YV2q3LR1jV6XAe4Lb2watQbBv1LabvGbMw66ZLwKahsKEu2Q6?cluster=devnet
+
+Jupiter Predict: POLY-1484949 (provider polymarket), status closed, result no, resolveAt 2026-04-05T06:14:32.577Z
+  result account on Solana mainnet: https://explorer.solana.com/address/BzM3HVUvVByzG3Jb6neiTVzpAxZcJxkXGLLASKWEbYhe
+  Polygon on-chain outcome (signed by Predge): No
