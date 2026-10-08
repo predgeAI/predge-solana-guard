@@ -41,7 +41,7 @@ import vaultIdl from "../target/idl/example_consumer.json";
 import { ExampleConsumer } from "../target/types/example_consumer";
 import { PredgeGuard } from "../target/types/predge_guard";
 import { ApiRecord, PREDGE_API_KEY_HEX, timelineAttestations, verifyApiRecord } from "./api-record";
-import { Attestation, DisputeRecord, STATUS_NAME, ed25519Ix, pda, sha256, signAttestation, toAnchorArg, toUnix } from "./lib";
+import { Attestation, DisputeRecord, STATUS_NAME, Status, ed25519Ix, pda, sha256, signAttestation, toAnchorArg, toUnix } from "./lib";
 
 const API = process.env.PREDGE_API ?? "https://api.predge.io";
 const JUPITER = process.env.JUPITER_PREDICTION_API ?? "https://api.jup.ag/prediction/v1";
@@ -214,7 +214,14 @@ async function main() {
     const when = new Date(a.observedAt * 1000).toISOString().replace(".000", "");
     console.log(`${when}  ${STATUS_NAME[a.status].padEnd(21)} disputes ${a.disputeCount}  risk ${String(a.riskBps).padStart(4)} bps`);
     console.log(`    post_attestation        ${link(sig)}`);
-    const r = await attempt(await releaseIx());
+    let r = await attempt(await releaseIx());
+    // A just-confirmed attestation can lag on the RPC node that serves the next
+    // transaction. If settlement was just posted, give it a moment and retry so
+    // the release reads the new state rather than the previous one.
+    for (let i = 0; !r.ok && a.status === Status.SETTLED && i < 3; i++) {
+      await new Promise((res) => setTimeout(res, 3000));
+      r = await attempt(await releaseIx());
+    }
     const label = vaultDeployed ? "vault.release (CPI)" : "check_settlement   ";
     console.log(`    ${label}     ${r.ok ? "ALLOWED" : `BLOCKED ${r.code}`}  ${link(r.sig)}`);
   }
