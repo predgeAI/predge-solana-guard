@@ -1,0 +1,25 @@
+{
+  "cluster": "devnet",
+  "fetched_at": "2026-10-14T15:32:54.128Z",
+  "note": "Raw account data read from devnet with getAccountInfo; used as decoding test vectors.",
+  "accounts": [
+    {
+      "label": "config",
+      "address": "EDqsV128my3Mugs8BskPuRESrzyNrwUWUwxXkGkcy2zs",
+      "owner": "B2gNjSeDBWHoLG3qdnsKVv5mqYMAZ3cULyCY4AZ3Jush",
+      "data_hex": "9b0caae01efacc82bd08e29bfb9038b502fa51215a0f7dd2b446f4538d3f3e5eca9b9b159c74f897d864a196a2c82b8f4e2fbca75364ec6d39f305bc5222851a3a362bcd1c494c4f100e000000000000ff"
+    },
+    {
+      "label": "market_risk polymarket 1484949",
+      "address": "DDn4AwFGJTeryNcLqnEqUm6k5kShCNznWCCXbPQNAurG",
+      "owner": "B2gNjSeDBWHoLG3qdnsKVv5mqYMAZ3cULyCY4AZ3Jush",
+      "data_hex": "efd27bf6e8db8bee232e50c86fb96248a91de3924a687e5052efbd7b689d2767df3495c934ccd5c7040200000075fdd169000000009c9ac76a000000001f347a28c348c5d1439b819bc0ab18160094f1b6c2a03570d4f5ef89473a5ba61529541e00000000fc"
+    },
+    {
+      "label": "market_risk polymarket 2169995",
+      "address": "9sokfCBeRSLsCiHrSsXNFazXi7bBFpmisdP3RKmx6ytR",
+      "owner": "B2gNjSeDBWHoLG3qdnsKVv5mqYMAZ3cULyCY4AZ3Jush",
+      "data_hex": "efd27bf6e8db8bee5c32089757c29dde07381f53a452efd3cfd6ddd19df10063512ee9521fec70af04020000000bc8206a000000002c30c06a00000000acbe0be068997ec43a9ca59c5ebb2bce121a9a5037143931888cd2f2d377419c9d2b4f1e00000000fd"
+    }
+  ]
+}
