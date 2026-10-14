@@ -1,0 +1,50 @@
+{
+  "name": "@predge/solana-guard",
+  "version": "0.1.0",
+  "description": "TypeScript client for Predge Settlement Guard on Solana: fetch and verify signed settlement-risk records, build post_attestation transactions, derive and read MarketRisk accounts.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/predgeAI/predge-solana-guard.git",
+    "directory": "sdk"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "test:devnet": "PREDGE_SDK_DEVNET=1 vitest run test/devnet.test.ts",
+    "test:localnet": "PREDGE_SDK_LOCALNET=1 vitest run test/localnet.test.ts"
+  },
+  "dependencies": {
+    "@noble/curves": "^1.9.7",
+    "@noble/hashes": "^1.8.0",
+    "buffer": "^6.0.3"
+  },
+  "peerDependencies": {
+    "@solana/web3.js": "^1.98.0"
+  },
+  "devDependencies": {
+    "@coral-xyz/anchor": "0.32.1",
+    "@solana/web3.js": "^1.98.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.4.0",
+    "vitest": "2.1.9"
+  }
+}

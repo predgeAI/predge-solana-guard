@@ -1,0 +1,54 @@
+{
+  "cluster": "devnet",
+  "note": "meta.logMessages of the blocked vault.release transactions in the README devnet table",
+  "txs": [
+    {
+      "signature": "sMjYjv6WARh1j6LEwpthSyKsgo5GM23NLhNGY57NhKzdUQkrLJrkSkPiePe3NcLGeJs7QDQBapw2Pkm8bqkzths",
+      "err": {
+        "InstructionError": [
+          1,
+          {
+            "Custom": 6011
+          }
+        ]
+      },
+      "logs": [
+        "Program ComputeBudget111111111111111111111111111111 invoke [1]",
+        "Program ComputeBudget111111111111111111111111111111 success",
+        "Program 6HSBJp8n4wM3RdjbbJY5XoKkBAH16HL8hEPbgk1RwUpg invoke [1]",
+        "Program log: Instruction: Release",
+        "Program B2gNjSeDBWHoLG3qdnsKVv5mqYMAZ3cULyCY4AZ3Jush invoke [2]",
+        "Program log: Instruction: CheckSettlement",
+        "Program log: AnchorError thrown in programs/predge_guard/src/lib.rs:198. Error Code: MarketDisputed. Error Number: 6011. Error Message: Reference market is disputed.",
+        "Program B2gNjSeDBWHoLG3qdnsKVv5mqYMAZ3cULyCY4AZ3Jush consumed 6483 of 194012 compute units",
+        "Program B2gNjSeDBWHoLG3qdnsKVv5mqYMAZ3cULyCY4AZ3Jush failed: custom program error: 0x177b",
+        "Program 6HSBJp8n4wM3RdjbbJY5XoKkBAH16HL8hEPbgk1RwUpg consumed 12322 of 199851 compute units",
+        "Program 6HSBJp8n4wM3RdjbbJY5XoKkBAH16HL8hEPbgk1RwUpg failed: custom program error: 0x177b"
+      ]
+    },
+    {
+      "signature": "2gyNm6dzmV3fz8m4SrUvqHjdzxksD5PoieG7C3MBaHc65m672KGn56aVJ3uDQHimfyBdjNVPbRot9GhrgAWC575Q",
+      "err": {
+        "InstructionError": [
+          1,
+          {
+            "Custom": 6012
+          }
+        ]
+      },
+      "logs": [
+        "Program ComputeBudget111111111111111111111111111111 invoke [1]",
+        "Program ComputeBudget111111111111111111111111111111 success",
+        "Program 6HSBJp8n4wM3RdjbbJY5XoKkBAH16HL8hEPbgk1RwUpg invoke [1]",
+        "Program log: Instruction: Release",
+        "Program B2gNjSeDBWHoLG3qdnsKVv5mqYMAZ3cULyCY4AZ3Jush invoke [2]",
+        "Program log: Instruction: CheckSettlement",
+        "Program log: AnchorError thrown in programs/predge_guard/src/lib.rs:199. Error Code: MarketEscalated. Error Number: 6012. Error Message: Reference market is escalated to a UMA vote.",
+        "Program B2gNjSeDBWHoLG3qdnsKVv5mqYMAZ3cULyCY4AZ3Jush consumed 6500 of 194013 compute units",
+        "Program B2gNjSeDBWHoLG3qdnsKVv5mqYMAZ3cULyCY4AZ3Jush failed: custom program error: 0x177c",
+        "Program 6HSBJp8n4wM3RdjbbJY5XoKkBAH16HL8hEPbgk1RwUpg consumed 12339 of 199852 compute units",
+        "Program 6HSBJp8n4wM3RdjbbJY5XoKkBAH16HL8hEPbgk1RwUpg failed: custom program error: 0x177c"
+      ]
+    }
+  ]
+}

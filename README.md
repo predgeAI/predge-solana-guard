@@ -81,6 +81,19 @@ predge_guard::cpi::check_settlement(CpiContext::new(
 
 You add three accounts: the guard's config PDA, the market's `MarketRisk` PDA and the guard program. Bind the risk account to your own market, as the example does with `market_risk.market_key == vault.market_key`. Full example: [`programs/example-consumer/src/lib.rs`](programs/example-consumer/src/lib.rs); tests: [`tests/vault_cpi.ts`](tests/vault_cpi.ts). Off-chain readers can skip CPI and read the `MarketRisk` account directly.
 
+### TypeScript SDK
+
+[`sdk/`](sdk/) is `@predge/solana-guard` (ESM, typed; not on npm yet, build from the repo). It fetches the signed record for a Polymarket market id and verifies it offline (pinned key, `content_hash`, ed25519 signature), builds the 97-byte attestation and the `[Ed25519 verify, post_attestation]` relay transaction, derives and reads the config and `MarketRisk` PDAs, and returns the three accounts for the `check_settlement` CPI:
+
+```ts
+import { getCheckSettlementAccounts, prepareAttestation } from "@predge/solana-guard";
+
+const p = await prepareAttestation(1484949);               // fetch + verify + map to the attestation
+const accounts = getCheckSettlementAccounts(p.marketKey);  // { predgeGuard, guardConfig, marketRisk }
+```
+
+Step-by-step guide for both sides (Rust CPI and TypeScript client), with the devnet IDs: [`docs/INTEGRATE.md`](docs/INTEGRATE.md). Byte layouts are tested against the Rust test vector, `scripts/lib.ts`, Anchor's IDL coder and account data read from devnet.
+
 ### Attestation layout (signed bytes, 97)
 
 | Offset | Size | Field |
@@ -164,6 +177,7 @@ anchor build
 anchor test          # local validator: 33 tests (guard program, CPI vault, off-chain checks)
 npm run test:unit    # off-chain only: encoding, dataset numbers, signed API record verification
 cargo test           # Rust unit tests
+npm run test:sdk     # TypeScript SDK unit tests (run `npm install` in sdk/ first)
 npx ts-node scripts/stats.ts   # recomputes 3,005 / 2,666 / 323 / 2,543 / 853
 npx ts-node scripts/verify-pack.ts examples/pm-2169995-microstrategy-may31.pack.json
 ```
