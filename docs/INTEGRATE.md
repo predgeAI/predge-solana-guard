@@ -118,7 +118,7 @@ evaluateGate(risk, cfg!.coolingSecs, Math.floor(Date.now() / 1000));   // { fina
 
 There are two keys, and the difference matters for relayers:
 
-1. **API record key** (`13fa3d18…52d9`, role `attestation` in [`/.well-known/predge-keys.json`](https://api.predge.io/.well-known/predge-keys.json), pinned in the SDK as `PREDGE_ATTESTATION_KEY_HEX`). It signs the JSON record. `verifySettlementRecord` checks it offline.
+1. **API record key** (`3b6551a6…9d1b`, role `attestation` in [`/.well-known/predge-keys.json`](https://api.predge.io/.well-known/predge-keys.json), pinned in the SDK as `PREDGE_ATTESTATION_KEY_HEX`). It signs the JSON record. `verifySettlementRecord` checks it offline and rejects any record signed by a revoked key, whatever date it carries (`13fa3d18…52d9` is revoked from 21 Oct 2026).
 2. **On-chain attestor** (`config.attestor`). It signs the 97-byte message. On devnet this is a Predge devnet key (`FZi4…JTyp`).
 
 Today the API returns the signed JSON, not a signed 97-byte message. Anyone can fetch and verify the record and compute the exact message to sign, but posting needs a signature from `config.attestor`. The 97-byte message carries `evidence_hash = sha256(canonical)`, which ties each on-chain record to exactly one API-signed record. The roadmap item "on-chain format from the API" removes this step: the API will return the 97-byte message signed by the published key, and then any relayer can post it with `buildPostAttestationTransaction` unchanged.

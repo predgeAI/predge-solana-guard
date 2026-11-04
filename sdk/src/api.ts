@@ -12,7 +12,7 @@
 // mapping to on-chain attestations), plus the content_hash and envelope checks.
 import { ed25519 } from "@noble/curves/ed25519";
 import { Attestation, polymarketMarketKey } from "./attestation.js";
-import { OPEN_DISPUTE_RISK_BPS, PREDGE_API_BASE, PREDGE_ATTESTATION_KEY_HEX, Status } from "./constants.js";
+import { OPEN_DISPUTE_RISK_BPS, PREDGE_API_BASE, PREDGE_ATTESTATION_KEY_HEX, REVOKED_ATTESTATION_KEYS_HEX, Status } from "./constants.js";
 import { bytesEqual, fromHex, sha256, toHex } from "./bytes.js";
 
 export interface ApiDispute {
@@ -148,6 +148,11 @@ export interface VerifyOptions {
   /** Hex ed25519 keys to trust. Default: [PREDGE_ATTESTATION_KEY_HEX]. */
   trustedKeys?: string[];
   /**
+   * Check a record signed by a revoked key instead of rejecting it, for reading
+   * old records only. The result proves nothing about when it was signed. Default false.
+   */
+  allowRevokedKeys?: boolean;
+  /**
    * Require `content_hash` and check it equals sha256(canonical). Default true.
    * Records saved before the API added the field (the examples/ fixtures) need `false`.
    */
@@ -183,6 +188,7 @@ function ed25519Verify(sigHex: string, msg: Uint8Array, pkHex: string): boolean 
 
 /**
  * Verify a record offline. Throws with the reason unless:
+ *  - `public_key` is not a revoked key (`allowRevokedKeys` to read old records);
  *  - algorithm is ed25519 and `public_key` is one of the trusted keys (`kid`, if present, is its prefix);
  *  - `payload` re-canonicalises to exactly `canonical`;
  *  - sha256(canonical) == `content_hash`;
@@ -195,6 +201,9 @@ export function verifySettlementRecord(rec: SettlementRiskRecord, opts: VerifyOp
   if (a.algorithm !== "ed25519") throw new Error(`unsupported algorithm ${a.algorithm}`);
   const trusted = (opts.trustedKeys ?? [PREDGE_ATTESTATION_KEY_HEX]).map((k) => k.toLowerCase());
   const signer = String(a.public_key ?? "").toLowerCase();
+  if (REVOKED_ATTESTATION_KEYS_HEX.includes(signer) && !opts.allowRevokedKeys) {
+    throw new Error(`record signed by ${a.public_key}, which is a revoked key`);
+  }
   if (!trusted.includes(signer)) throw new Error(`record signed by ${a.public_key}, which is not a trusted (pinned) key`);
   if (a.kid !== undefined && !signer.startsWith(String(a.kid).toLowerCase())) throw new Error(`kid ${a.kid} does not match public_key`);
   if (typeof a.canonical !== "string") throw new Error("record has no canonical string");

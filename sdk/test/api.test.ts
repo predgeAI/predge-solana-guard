@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import {
   OPEN_DISPUTE_RISK_BPS,
   PREDGE_ATTESTATION_KEY_HEX,
+  REVOKED_ATTESTATION_KEYS_HEX,
   SettlementRiskRecord,
   Status,
   attestationFromRecord,
@@ -21,11 +22,15 @@ import { hex, readJson, rootDepsInstalled } from "./helpers.js";
 
 // Saved from GET /v1/settlement-risk/<id>: the examples/ files on 7 Oct 2026
 // (before the API added content_hash), the sdk fixture on 14 Oct 2026 (with
-// content_hash, kid and envelope_signature).
+// content_hash, kid and envelope_signature), all signed by the key revoked on
+// 21 Oct 2026, so they are read with LEGACY. The 2026-11-04 fixtures are live
+// responses signed by the current key.
 const OLD_2169995 = "examples/api-settlement-risk-2169995.json";
 const OLD_1484949 = "examples/api-settlement-risk-1484949.json";
-const NEW_1484949 = "sdk/test/fixtures/api-settlement-risk-1484949-2026-10-14.json";
-const KEYS = "sdk/test/fixtures/predge-keys-2026-10-14.json";
+const REVOKED_1484949 = "sdk/test/fixtures/api-settlement-risk-1484949-2026-10-14.json";
+const NEW_1484949 = "sdk/test/fixtures/api-settlement-risk-1484949-2026-11-04.json";
+const KEYS = "sdk/test/fixtures/predge-keys-2026-11-04.json";
+const LEGACY = { trustedKeys: REVOKED_ATTESTATION_KEYS_HEX, allowRevokedKeys: true };
 const rec = (p: string): SettlementRiskRecord => readJson(p);
 const unix = (iso: string) => Math.floor(Date.parse(iso) / 1000);
 
@@ -33,6 +38,12 @@ describe("pinned key", () => {
   it("is the active attestation key in the published keys document", () => {
     const doc = readJson(KEYS);
     expect(attestationKeysFrom(doc)).toEqual([PREDGE_ATTESTATION_KEY_HEX]);
+  });
+  it("lists every revoked key as revoked in the published keys document, and none as active", () => {
+    const doc = readJson(KEYS);
+    const revoked = doc.keys.filter((k: any) => k.status === "revoked").map((k: any) => k.public_key);
+    expect(revoked).toEqual(REVOKED_ATTESTATION_KEYS_HEX);
+    for (const k of REVOKED_ATTESTATION_KEYS_HEX) expect(attestationKeysFrom(doc)).not.toContain(k);
   });
   it("ignores keys with another role or inactive keys", () => {
     const doc = readJson(KEYS);
@@ -55,8 +66,8 @@ describe("verifySettlementRecord", () => {
 
   it("verifies the older fixtures when content_hash is not required", () => {
     for (const p of [OLD_2169995, OLD_1484949]) {
-      expect(() => verifySettlementRecord(rec(p))).toThrow(/content_hash/);
-      const v = verifySettlementRecord(rec(p), { requireContentHash: false });
+      expect(() => verifySettlementRecord(rec(p), LEGACY)).toThrow(/content_hash/);
+      const v = verifySettlementRecord(rec(p), { ...LEGACY, requireContentHash: false });
       expect(v.contentHashChecked).toBe(false);
       expect(toHex(v.evidenceHash)).toBe(toHex(sha256(rec(p).attestation.canonical)));
     }
@@ -94,7 +105,16 @@ describe("verifySettlementRecord", () => {
     r.attestation.data_basis = "changed";
     expect(() => verifySettlementRecord(r)).toThrow(/envelope_signature/);
     const r2 = rec(OLD_1484949);
-    expect(() => verifySettlementRecord(r2, { requireContentHash: false, requireEnvelopeSignature: true })).toThrow(/envelope_signature/);
+    expect(() => verifySettlementRecord(r2, { ...LEGACY, requireContentHash: false, requireEnvelopeSignature: true })).toThrow(/envelope_signature/);
+  });
+
+  it("rejects a record signed by a revoked key, even if the caller trusts that key", () => {
+    for (const p of [REVOKED_1484949, OLD_2169995]) {
+      expect(() => verifySettlementRecord(rec(p))).toThrow(/revoked/);
+      expect(() => verifySettlementRecord(rec(p), { trustedKeys: REVOKED_ATTESTATION_KEYS_HEX })).toThrow(/revoked/);
+    }
+    // The signature itself still checks out, which is why the revocation check has to be separate.
+    expect(verifySettlementRecord(rec(REVOKED_1484949), LEGACY).signer).toBe(REVOKED_ATTESTATION_KEYS_HEX[0]);
   });
 
   it("rejects a record signed by a key that is not trusted, even with a valid signature", () => {
@@ -127,7 +147,7 @@ describe("verifySettlementRecord", () => {
 
 describe("mapping a signed record to attestations", () => {
   it("maps 2169995 to DISPUTED, ESCALATED, SETTLED with evidence_hash = sha256(canonical)", () => {
-    const v = verifySettlementRecord(rec(OLD_2169995), { requireContentHash: false });
+    const v = verifySettlementRecord(rec(OLD_2169995), { ...LEGACY, requireContentHash: false });
     const settledAt = unix("2026-06-04T00:34:19Z");
     const t = timelineFromRecord(v, { settledAt });
     expect(t.map((a) => a.status)).toEqual([Status.DISPUTED, Status.ESCALATED, Status.SETTLED]);
@@ -179,8 +199,15 @@ describe("mapping a signed record to attestations", () => {
       [OLD_1484949, unix("2026-04-05T06:13:09Z")],
       [NEW_1484949, undefined],
     ] as const) {
-      const ours = timelineFromRecord(verifySettlementRecord(rec(p), { requireContentHash: false }), { settledAt });
-      const theirs = script.timelineAttestations(script.verifyApiRecord(rec(p) as any), { settledAt });
+      const revoked = p !== NEW_1484949;
+      const ours = timelineFromRecord(
+        verifySettlementRecord(rec(p), { ...(revoked ? LEGACY : {}), requireContentHash: false }),
+        { settledAt },
+      );
+      const theirs = script.timelineAttestations(
+        script.verifyApiRecord(rec(p) as any, revoked ? REVOKED_ATTESTATION_KEYS_HEX[0] : undefined, revoked),
+        { settledAt },
+      );
       expect(ours.length).toBe(theirs.length);
       ours.forEach((a, i) => {
         const b = theirs[i];
@@ -235,6 +262,11 @@ describe("fetching (mocked fetch)", () => {
     await expect(fetchSettlementRisk("999", { fetch: f })).rejects.toThrow(/HTTP 404/);
     const { f: f2 } = mockFetch({ "https://api.predge.io/v1/settlement-risk/1": { error: "x" } });
     await expect(fetchSettlementRisk("1", { fetch: f2 })).rejects.toThrow(/not a signed/);
+  });
+
+  it("rejects a record signed by the revoked key", async () => {
+    const { f } = mockFetch({ "https://api.predge.io/v1/settlement-risk/1484949": rec(REVOKED_1484949) });
+    await expect(prepareAttestation("1484949", { fetch: f })).rejects.toThrow(/revoked/);
   });
 
   it("rejects a record tampered in transit", async () => {

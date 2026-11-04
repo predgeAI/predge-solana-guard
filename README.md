@@ -128,7 +128,7 @@ The score is advisory. The gate itself trusts only status and time.
 
 Key note, stated plainly: today the API signs JSON with Predge's API key, while the program verifies the compact 97-byte message against the attestor key in its config. In the demo the relayer checks the API signature off-chain and the configured devnet attestor key signs the compact message; `evidence_hash` ties each on-chain record to exactly one API-signed record. Next step: the API returns the 97-byte message signed directly, so nobody re-signs.
 
-Output for Polymarket 1484949 on a local validator (transaction links omitted):
+Output for Polymarket 1484949 on a local validator (transaction links omitted), recorded before the key rotation. `13fa3d18a369e6c7` is revoked from 21 Oct 2026, and the script now pins the current key `3b6551a6439b9bda` and rejects records signed by the old one:
 
 ```
 Market    "Netanyahu out by March 31?" (Polymarket 1484949)
