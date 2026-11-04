@@ -9,12 +9,19 @@ export const EXAMPLE_CONSUMER_PROGRAM_ID = new PublicKey("6HSBJp8n4wM3RdjbbJY5Xo
 export const PREDGE_API_BASE = "https://api.predge.io";
 
 /**
- * Predge's published attestation key (role "attestation", kid 13fa3d18a369e6c7)
+ * Predge's published attestation key (role "attestation", kid 3b6551a6439b9bda)
  * in https://api.predge.io/.well-known/predge-keys.json. Pinned in source so
  * that a compromised network path or config cannot swap the trusted signer.
  * Same value as `PREDGE_API_KEY_HEX` in scripts/api-record.ts.
  */
-export const PREDGE_ATTESTATION_KEY_HEX = "13fa3d18a369e6c71bf941563ba47822b30182273d5106a0e8fb61c5016352d9";
+export const PREDGE_ATTESTATION_KEY_HEX = "3b6551a6439b9bda0de7e3b8dc89f276b2141fdfde310f762e663ab4ba2e9d1b";
+
+/**
+ * Attestation keys listed as revoked in the keys document. A leaked key can
+ * backdate, so a record signed by one is rejected whatever date it carries.
+ * 13fa3d18a369e6c7: revoked from 2026-10-21T00:00:00Z (hosting provider breach).
+ */
+export const REVOKED_ATTESTATION_KEYS_HEX = ["13fa3d18a369e6c71bf941563ba47822b30182273d5106a0e8fb61c5016352d9"];
 
 /** Domain separator that prefixes every signed attestation (`DOMAIN` in lib.rs). */
 export const ATTESTATION_DOMAIN = new TextEncoder().encode("PREDGE-SR-v1");

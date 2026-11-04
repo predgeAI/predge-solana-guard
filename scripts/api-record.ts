@@ -18,7 +18,10 @@ import { Attestation, OPEN_DISPUTE_RISK_BPS, Status, polymarketKey, sha256, toUn
  * purpose: whoever can change an env var should not be able to swap the
  * trusted signer.
  */
-export const PREDGE_API_KEY_HEX = "13fa3d18a369e6c71bf941563ba47822b30182273d5106a0e8fb61c5016352d9";
+export const PREDGE_API_KEY_HEX = "3b6551a6439b9bda0de7e3b8dc89f276b2141fdfde310f762e663ab4ba2e9d1b";
+
+/** Revoked from 2026-10-21T00:00:00Z. Same list as `REVOKED_ATTESTATION_KEYS_HEX` in the SDK. */
+export const REVOKED_API_KEYS_HEX = ["13fa3d18a369e6c71bf941563ba47822b30182273d5106a0e8fb61c5016352d9"];
 
 export interface ApiDispute {
   disputed_at: string;
@@ -79,10 +82,13 @@ export interface VerifiedRecord {
   title: string;
 }
 
-/** Throws unless the record is signed by `trustedKeyHex` over its own payload. */
-export function verifyApiRecord(rec: ApiRecord, trustedKeyHex = PREDGE_API_KEY_HEX): VerifiedRecord {
+/** Throws unless the record is signed by `trustedKeyHex`, not revoked unless `allowRevoked`, over its own payload. */
+export function verifyApiRecord(rec: ApiRecord, trustedKeyHex = PREDGE_API_KEY_HEX, allowRevoked = false): VerifiedRecord {
   const a = rec.attestation;
   if (!a) throw new Error("record has no attestation");
+  if (REVOKED_API_KEYS_HEX.includes(a.public_key.toLowerCase()) && !allowRevoked) {
+    throw new Error(`record signed by ${a.public_key}, which is a revoked key`);
+  }
   if (a.algorithm !== "ed25519") throw new Error(`unsupported algorithm ${a.algorithm}`);
   if (a.public_key.toLowerCase() !== trustedKeyHex.toLowerCase()) {
     throw new Error(`record signed by ${a.public_key}, expected pinned Predge key ${trustedKeyHex}`);
